@@ -13,6 +13,13 @@
         public Form1()
         {
             InitializeComponent();
+
+            string[] lines = File.ReadAllLines("words_alpha.txt");
+
+            foreach (string line in lines)
+            { 
+            
+            }
         }
     }
 }

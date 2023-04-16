@@ -13,20 +13,49 @@ namespace ADV_1
         public List<string> Complete(string input)
         {
             var Input = input.ToCharArray();
-            Node fish = root;
-            for (int i = 0; i < Input.Length; i++)
+            List<string> results = new List<string>();
+            
+            
+            results.AddRange(find(input, root));
+
+            //find parts here
+
+            return results;
+        }
+
+        private List<string> find(string input, Node node)
+        {
+            List<string> results = new List<string>();
+
+            for (int i = 0; i < node.Children.Count; i++)
             {
-                if (fish.ContainsKey(Input[i]))
+                if (node.Children[i].letter == input[0])
                 {
-                    fish = fish.Children[Input[i]];
-                }
-                else
-                {
-                    break;
+                    results.AddRange(find(depend(input), node.Children[i]));
                 }
             }
 
+            return results;
+        }
 
+        private string depend(string input) //reverse append
+        {
+            string result = "";
+            for (int i = 1; i < input.Length; i++)
+            {
+                result += input[i];
+            }
+            return result;
+        }
+
+        public void add(string word)
+        {
+            Node fish = root;
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (fish.ContainsKey(word[i]))
+            }
         }
     }
 }
