@@ -54,7 +54,7 @@ namespace ADV_1
 
             for (int i = 0; i < word.Length; i++)
             {
-                if (fish.ContainsKey(word[i]))
+                if (fish.ContainsKey(word[i]))//finish this
             }
         }
     }
