@@ -14,12 +14,16 @@
         {
             InitializeComponent();
 
+            Trie trie = new Trie();
+
             string[] lines = File.ReadAllLines("words_alpha.txt");
 
             foreach (string line in lines)
             { 
-            
+                trie.add(line);
             }
+
+            ;
         }
     }
 }

@@ -54,7 +54,18 @@ namespace ADV_1
 
             for (int i = 0; i < word.Length; i++)
             {
-                if (fish.ContainsKey(word[i]))//finish this
+                if (fish.ContainsKey(word[i]))
+                {
+                    for (int j = 0; j < fish.Children.Count; j++)
+                    {
+                        if (fish.Children[i].letter == word[i]) fish = fish.Children[i];
+                    }
+                }
+                else
+                {
+                    fish.Children.Add(new Node(word[i]));
+                    fish = fish.Children[fish.Children.Count - 1];
+                }
             }
         }
     }
