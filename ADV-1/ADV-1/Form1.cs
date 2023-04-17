@@ -10,20 +10,34 @@
         vs when it's a suggestion. Of course, if I type in "sdfgds", it's reasonable to have a return value of 😢 - there's just no way to do much with that garbage input. 
         */
 
+        Trie trie;
+
         public Form1()
         {
             InitializeComponent();
 
-            Trie trie = new Trie();
+            trie = new Trie();
 
             string[] lines = File.ReadAllLines("words_alpha.txt");
 
             foreach (string line in lines)
-            { 
+            {
                 trie.add(line);
             }
+        }
 
-            ;
+        private void InputBox_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void doButton_Click(object sender, EventArgs e)
+        {
+            var result = trie.Complete(InputBox.Text);
+
+            outputBox.Items.Clear();
+
+            outputBox.Items.AddRange(result.ToArray());
         }
     }
 }

@@ -11,10 +11,18 @@ namespace ADV_1
         public char letter { get; private set; }
 
         public List<Node> Children;
+        public Node Parent;
 
         public Node(char letter)
         {
             this.letter = letter;
+            Children = new List<Node>();
+        }
+        public Node(char letter, Node Parent)
+        {
+            this.letter = letter;
+            Children = new List<Node>();
+            this.Parent = Parent;
         }
 
         public bool ContainsKey(char glyph)
