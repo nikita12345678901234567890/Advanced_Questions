@@ -1,10 +1,12 @@
-﻿namespace ADV_2
+﻿using System.Collections;
+
+namespace ADV_2
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            int[] numbers = getNumbers(100000);
+            int[] numbers = getNumbers(10);//0000);
             Console.WriteLine(benchmark(numbers));
             Console.WriteLine(MaxXOR(numbers));
         }
@@ -22,6 +24,11 @@
             }
 
             return result;
+        }
+
+        public static int MaxierXOR(int[] numbers)
+        {
+            BitArray BitArray;
         }
 
         public static int MaxXOR(int[] numbers)
@@ -47,7 +54,7 @@
 
             for (int i = 0; i < number; i++)
             {
-                numbers[i] = random.Next(0, number * 10);
+                numbers[i] = random.Next(0, 1000000);
             }
 
             return numbers;
