@@ -9,6 +9,7 @@ namespace ADV_2
             int[] numbers = getNumbers(10);//0000);
             Console.WriteLine(benchmark(numbers));
             Console.WriteLine(MaxXOR(numbers));
+            Console.WriteLine(MaxierXOR(numbers));
         }
 
         public static int benchmark(int[] numbers)
@@ -28,7 +29,16 @@ namespace ADV_2
 
         public static int MaxierXOR(int[] numbers)
         {
-            BitArray BitArray;
+            Trie trie = new Trie();
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                trie.add(numbers[i]);
+            }
+
+            var result = trie.FindBest();
+
+            return result.one ^ result.two;
         }
 
         public static int MaxXOR(int[] numbers)
@@ -54,7 +64,7 @@ namespace ADV_2
 
             for (int i = 0; i < number; i++)
             {
-                numbers[i] = random.Next(0, 1000000);
+                numbers[i] = random.Next(0, 100);
             }
 
             return numbers;

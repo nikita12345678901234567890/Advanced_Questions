@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -107,7 +108,7 @@ namespace ADV_2
         {
             Node fish = root;
 
-            BitArray input = new BitArray(number);
+            BitArray input = new BitArray(new byte[]{ Convert.ToByte(number) });
 
             for (int i = 0; i < input.Length; i++)
             {
@@ -115,15 +116,65 @@ namespace ADV_2
                 {
                     for (int j = 0; j < fish.Children.Count; j++)
                     {
-                        if (fish.Children[j].letter == word[i]) fish = fish.Children[j];
+                        if (fish.Children[j].bit == input[i]) fish = fish.Children[j];
                     }
                 }
                 else
                 {
-                    fish.Children.Add(new Node(word[i], fish));
+                    fish.Children.Add(new Node(input[i], fish));
                     fish = fish.Children[fish.Children.Count - 1];
                 }
             }
+        }
+
+        public (int one, int two) FindBest()
+        {
+            var start = GetNodesInRow(1);
+
+            SortedList list = new SortedList();
+
+            //list.Add(MaxXORvalue, (number1, number2));
+
+
+        }
+
+        public List<Node> GetNodesInRow(int row)
+        {
+            var nodesInRow = new List<Node>();
+
+            if (root == null || row < 0)
+            {
+                return nodesInRow;
+            }
+
+            var queue = new Queue<Node>();
+            queue.Enqueue(root);
+
+            int currentRow = 0;
+
+            while (queue.Count > 0 && currentRow <= row)
+            {
+                int currentLevelSize = queue.Count;
+
+                for (int i = 0; i < currentLevelSize; i++)
+                {
+                    var node = queue.Dequeue();
+
+                    if (currentRow == row)
+                    {
+                        nodesInRow.Add(node);
+                    }
+
+                    foreach (var child in node.Children)
+                    {
+                        queue.Enqueue(child);
+                    }
+                }
+
+                currentRow++;
+            }
+
+            return nodesInRow;
         }
     }
 }

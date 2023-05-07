@@ -9,7 +9,7 @@ namespace ADV_2
 {
     public class Node
     {
-        bool bit;
+        public bool bit;
 
         public List<Node> Children;
         public Node Parent;
