@@ -14,16 +14,22 @@ namespace ADV_2
         public List<Node> Children;
         public Node Parent;
 
+        public BitArray bestXOR;
+
         public Node(bool bit)
         {
             this.bit = bit;
             Children = new List<Node>();
+
+            bestXOR = new BitArray(8);
         }
         public Node(bool bit, Node Parent)
         {
             this.bit = bit;
             Children = new List<Node>();
             this.Parent = Parent;
+
+            bestXOR = new BitArray(8);
         }
 
         public bool ContainsKey(bool key)

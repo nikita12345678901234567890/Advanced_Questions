@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ADV_2
 {
@@ -6,10 +7,11 @@ namespace ADV_2
     {
         static void Main(string[] args)
         {
-            int[] numbers = getNumbers(10);//0000);
+            int[] numbers = getNumbers(100000);
             Console.WriteLine(benchmark(numbers));
             Console.WriteLine(MaxXOR(numbers));
-            Console.WriteLine(MaxierXOR(numbers));
+            //Console.WriteLine(MaxierXOR(numbers));
+            Console.WriteLine(Test(numbers));
         }
 
         public static int benchmark(int[] numbers)
@@ -36,9 +38,23 @@ namespace ADV_2
                 trie.add(numbers[i]);
             }
 
-            var result = trie.FindBest();
+            trie.BreadthFirstTraversal();
 
-            return result.one ^ result.two;
+            int[] array = new int[1];
+            trie.root.bestXOR.CopyTo(array, 0);
+
+            return array[0];
+        }
+
+        public static int Test(int[] numbers)
+        { 
+            HashSet<int> hash = new HashSet<int>();
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                hash.Add(numbers[i]);
+            }
+
+            return benchmark(hash.ToArray());
         }
 
         public static int MaxXOR(int[] numbers)
