@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Reflection.Metadata.Ecma335;
+using System.Text;
 
 namespace ADV_2
 {
@@ -7,11 +8,12 @@ namespace ADV_2
     {
         static void Main(string[] args)
         {
-            int[] numbers = getNumbers(100000);
+            int[] numbers = getNumbers(10000);
             Console.WriteLine(benchmark(numbers));
-            Console.WriteLine(MaxXOR(numbers));
+            //Console.WriteLine(MaxXOR(numbers));
             //Console.WriteLine(MaxierXOR(numbers));
-            Console.WriteLine(Test(numbers));
+            //Console.WriteLine(hacky(numbers));
+            thing(numbers);
         }
 
         public static int benchmark(int[] numbers)
@@ -24,6 +26,22 @@ namespace ADV_2
                 { 
                     if ((numbers[i] ^ numbers[j]) > result) result = numbers[i] ^ numbers[j];
                 }
+            }
+
+            return result;
+        }
+
+        public static int MaxXOR(int[] numbers)
+        {
+            Array.Sort(numbers);
+
+            int biggest = numbers[numbers.Length - 1];
+
+            int result = 0;
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if ((numbers[i] ^ biggest) > result) result = numbers[i] ^ biggest;
             }
 
             return result;
@@ -46,7 +64,7 @@ namespace ADV_2
             return array[0];
         }
 
-        public static int Test(int[] numbers)
+        public static int hacky(int[] numbers)
         { 
             HashSet<int> hash = new HashSet<int>();
             for (int i = 0; i < numbers.Length; i++)
@@ -57,25 +75,51 @@ namespace ADV_2
             return benchmark(hash.ToArray());
         }
 
-        public static int MaxXOR(int[] numbers)
+        public static void thing(int[] numbers)
         {
-            Array.Sort(numbers);
-
-            int biggest = numbers[numbers.Length - 1];
-
-            int result = 0;
+            Trie trie = new Trie();
 
             for (int i = 0; i < numbers.Length; i++)
             {
-                if ((numbers[i] ^ biggest) > result) result = numbers[i] ^ biggest;
+                trie.add(numbers[i]);
             }
 
-            return result;
+            var result = trie.thing();
+
+            Console.WriteLine(ToBitString(result.one));
+            Console.WriteLine(ToBitString(result.zero));
+            Console.WriteLine(getInt(result.one.Xor(result.zero)));
+            //Console.WriteLine(getInt(result.one) ^ getInt(result.zero));
+        }
+
+        public static int getInt(BitArray bitArray)
+        {
+
+            if (bitArray.Length > 32)
+                throw new ArgumentException("Argument length shall be at most 32 bits.");
+
+            int[] array = new int[1];
+            bitArray.CopyTo(array, 0);
+            return array[0];
+
+        }
+
+        public static string ToBitString(BitArray bits)
+        {
+            var sb = new StringBuilder();
+
+            for (int i = bits.Count - 1; i >= 0; i--)
+            {
+                char c = bits[i] ? '1' : '0';
+                sb.Append(c);
+            }
+
+            return sb.ToString();
         }
 
         public static int[] getNumbers(int number)
         {
-            Random random = new Random();
+            Random random = new Random(537);
             int[] numbers = new int[number];
 
             for (int i = 0; i < number; i++)

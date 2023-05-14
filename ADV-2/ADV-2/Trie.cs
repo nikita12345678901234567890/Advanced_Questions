@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32.SafeHandles;
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +26,7 @@ namespace ADV_2
 
             BitArray input = new BitArray(new byte[]{ Convert.ToByte(number) });
 
-            for (int i = 0; i < input.Length; i++)
+            for (int i = input.Length - 1; i >= 0; i--)
             {
                 if ((fish.Children.Count > 0 && fish.Children[0].bit == input[i]) || (fish.Children.Count > 1 && fish.Children[1].bit == input[i]))
                 {
@@ -77,6 +79,82 @@ namespace ADV_2
             }
         }
 
+        public (BitArray one, BitArray zero) thing()
+        {
+            Node one = root;
+            Node zero = root;
 
+            while (one.Children.Count != 0 && zero.Children.Count != 0)
+            {
+                if (one.Children.Count == 1)
+                {
+                    if (zero.Children.Count == 1)
+                    {
+                        one = one.Children[0];
+                        zero = zero.Children[0];
+                        continue;
+                    }
+                    else
+                    {
+                        if (one.Children[0].bit != zero.Children[0].bit)
+                        {
+                            one = one.Children[0];
+                            zero = zero.Children[0];
+                            continue;
+                        }
+                        else
+                        {
+                            one = one.Children[0];
+                            zero = zero.Children[1];
+                            continue;
+                        }
+                    }
+                }
+                else
+                {
+                    if (zero.Children.Count == 1)
+                    {
+                        if (one.Children[0].bit != zero.Children[0].bit)
+                        {
+                            one = one.Children[0];
+                            zero = zero.Children[0];
+                            continue;
+                        }
+                        else
+                        {
+                            one = one.Children[1];
+                            zero = zero.Children[0];
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if (one.Children[0].bit) one = one.Children[0];
+                        else one = one.Children[1];
+
+                        if (zero.Children[0].bit) zero = zero.Children[1];
+                        else zero = zero.Children[0];
+                    }
+                }
+            }
+
+            return (reverse(one), reverse(zero));
+        }
+
+        private BitArray reverse(Node node)
+        {
+            BitArray result = new BitArray(8, false);
+
+            int level = 0;
+
+            while (node != root)
+            {
+                result.Set(level, node.bit);
+                node = node.Parent;
+                level++;
+            }
+
+            return result;
+        }
     }
 }
