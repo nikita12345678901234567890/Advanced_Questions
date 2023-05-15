@@ -156,5 +156,54 @@ namespace ADV_2
 
             return result;
         }
+
+        public int FindMaximumXor(int[] nums)
+        {
+            TrieNode root = new TrieNode();
+
+            // Insert all the numbers into the trie
+            foreach (int num in nums)
+            {
+                TrieNode node = root;
+                for (int i = 31; i >= 0; i--)
+                {
+                    int bit = (num >> i) & 1;
+                    if (node.Children[bit] == null)
+                    {
+                        node.Children[bit] = new TrieNode();
+                    }
+                    node = node.Children[bit];
+                }
+            }
+
+            int max_xor = 0;
+
+            // Find the maximum XOR value
+            foreach (int num in nums)
+            {
+                int xor = 0;
+                TrieNode node = root;
+                for (int i = 31; i >= 0; i--)
+                {
+                    int bit = (num >> i) & 1;
+                    if (node.Children[bit ^ 1] != null)
+                    {
+                        xor += (1 << i);
+                        node = node.Children[bit ^ 1];
+                    }
+                    else
+                    {
+                        node = node.Children[bit];
+                    }
+                }
+                max_xor = Math.Max(max_xor, xor);
+            }
+
+            return max_xor;
+        }
+    }
+    public class TrieNode
+    {
+        public TrieNode[] Children = new TrieNode[2];
     }
 }

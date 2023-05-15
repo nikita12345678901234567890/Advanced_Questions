@@ -8,12 +8,15 @@ namespace ADV_2
     {
         static void Main(string[] args)
         {
-            int[] numbers = getNumbers(10000);
+            int[] numbers = getNumbers(15);
             Console.WriteLine(benchmark(numbers));
             //Console.WriteLine(MaxXOR(numbers));
             //Console.WriteLine(MaxierXOR(numbers));
             //Console.WriteLine(hacky(numbers));
             thing(numbers);
+
+            Trie trie = new Trie();
+            Console.WriteLine(trie.FindMaximumXor(numbers));
         }
 
         public static int benchmark(int[] numbers)
