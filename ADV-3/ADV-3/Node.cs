@@ -10,6 +10,7 @@ namespace ADV_3
     {
         public int length;
         public string text;
+        public string type;
         public Node parent;
         public Node left;
         public Node right;
@@ -20,7 +21,7 @@ namespace ADV_3
             text = "";
             this.parent = parent;
         }
-        public Node(string text, Node parent)
+        public Node(string text, string type, Node parent)
         { 
             this.text = text;
             length = text.Length;

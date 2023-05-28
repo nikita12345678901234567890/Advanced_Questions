@@ -10,18 +10,24 @@ namespace ADV_3
     {
         static void Main(string[] args)
         {
-            string text = "I don't know, some random text.\nMore text I guess. Here is some more text.";
+            List<(string, string)> text = new List<(string, string)>();
+            text.Add(("Hello", "word"));
+            text.Add((", ", "separator"));
+            text.Add(("this", "word"));
+            text.Add((" ", "separator"));
+            text.Add(("is", "word"));
+            text.Add((" ", "separator"));
+            text.Add(("some", "word"));
+            text.Add((" ", "separator"));
+            text.Add(("sample", "word"));
+            text.Add((" ", "separator"));
+            text.Add(("text.", "word"));
 
-            Console.WriteLine($"Enter width (original length = {text.Length})");
-            int width = int.Parse(Console.ReadLine());
+            Rope rope = new Rope();
 
-            while (width < 10)
-            {
-                Console.WriteLine("Shorter than original, try again");
-                width = int.Parse(Console.ReadLine());
-            }
+            rope.BuildRope(text);
 
-            Console.WriteLine(justify(text, width));
+            Console.WriteLine(rope.justify(15));
         }
 
         public static string justify(string input, int width)
