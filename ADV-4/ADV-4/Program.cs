@@ -47,15 +47,5 @@
             }
             return max;
         }
-
-        public void test()
-        {
-            Envelope[][] thing;
-
-            for (int i = 0; i < thing.get.getLength(0); i++)
-            {
-                env.add(new Envelope(envelopes[i, 0], envelopes[i, 1]));
-            }
-        }
     }
 }
