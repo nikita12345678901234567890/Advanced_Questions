@@ -10,24 +10,41 @@ namespace ADV_3
     {
         static void Main(string[] args)
         {
-            List<(string, string)> text = new List<(string, string)>();
-            text.Add(("Hello", "word"));
-            text.Add((", ", "separator"));
-            text.Add(("this", "word"));
-            text.Add((" ", "separator"));
-            text.Add(("is", "word"));
-            text.Add((" ", "separator"));
-            text.Add(("some", "word"));
-            text.Add((" ", "separator"));
-            text.Add(("sample", "word"));
-            text.Add((" ", "separator"));
-            text.Add(("text.", "word"));
+            string text = "As the sun dipped below the horizon, casting a warm golden glow across the vast expanse of the ocean, a gentle breeze whispered through the tall swaying palm trees. The air was filled with the sweet scent of tropical flowers, mingling with the salty tang of the sea. The sound of waves crashing against the shore created a soothing symphony that lulled the nearby beachgoers into a state of tranquility. Seagulls soared gracefully overhead, their cries echoing in the distance. It was a moment of perfect serenity, a fleeting glimpse of paradise on Earth.";
+
+            var words = convert(text);
 
             Rope rope = new Rope();
 
-            rope.BuildRope(text);
+            rope.BuildRope(words);
 
-            Console.WriteLine(rope.justify(15));
+            Console.WriteLine(rope.justify(25));
+        }
+
+        public static List<(string text, string type)> convert(string words)
+        { 
+            List<(string text, string type)> result = new List<(string text, string type)>();
+
+            bool isword = false;
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (char.IsLetter(words, i) && !isword)
+                {
+                    isword = true;
+                    result.Add(("", "word"));
+                }
+                else if (!char.IsLetter(words, i) && isword)
+                {
+                    isword = false;
+                    result.Add(("", "separator"));
+                }
+
+                var fish = result[result.Count - 1];
+                fish.text += words[i];
+                result[result.Count - 1] = fish;
+            }
+
+            return result;
         }
 
         public static string justify(string input, int width)
