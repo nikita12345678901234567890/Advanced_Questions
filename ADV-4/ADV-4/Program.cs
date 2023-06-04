@@ -1,49 +1,66 @@
-﻿namespace ADV_4
+﻿using System.Collections.Immutable;
+using System.Linq;
+
+namespace ADV_4
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            List<Envelope> envelopes = new List<Envelope>();
+            int[][] envelopes = new int[4][];
+            for (int i = 0; i < envelopes.GetLength(0); i++)
+            {
+                envelopes[i] = new int[2];
+            }
+            
+            envelopes[0][0] = 5;
+            envelopes[0][1] = 4;
 
-            envelopes.Add(new Envelope(50, 50));
-            envelopes.Add(new Envelope(25, 50));
-            envelopes.Add(new Envelope(20, 18));
-            envelopes.Add(new Envelope(15, 5));
-            envelopes.Add(new Envelope(12, 4));
-            envelopes.Add(new Envelope(10, 3));
-            envelopes.Add(new Envelope(16, 5));
+            envelopes[1][0] = 6;
+            envelopes[1][1] = 4;
+
+            envelopes[2][0] = 6;
+            envelopes[2][1] = 7;
+
+            envelopes[3][0] = 2;
+            envelopes[3][1] = 3;
 
             Console.WriteLine(doStuff(envelopes));
         }
 
-        public static int doStuff(List<Envelope> envelopes)
+        public static int doStuff(int[][] envelopes)
         {
-            for (int i = 0; i < envelopes.Count; i++)
-            {
-                for (int j = 0; j < envelopes.Count; j++)
-                {
-                    if (envelopes[i].check(envelopes[j])) envelopes[i].fits.Add(envelopes[j]);
-                }
-            }
+            envelopes = envelopes.OrderBy(y => y[0]).ThenBy(y => y[1]).ToArray();
+
+            int[] fish = new int[envelopes.Length];
+            Array.Fill(fish, int.MaxValue);
 
             int max = 0;
-            foreach (Envelope envelope in envelopes)
+            foreach (int[] envelope in envelopes)
             {
-                int result = getMax(envelope);
-                if (result > max) max = result;
-            }
+                // Perform binary search to find the insertion point
+                int left = 0, right = max;
+                while (left < right)
+                {
+                    int mid = (left + right) / 2;
+                    if (fish[mid] < envelope[1])
+                    {
+                        left = mid + 1;
+                    }
+                    else
+                    {
+                        right = mid;
+                    }
+                }
 
-            return max;
-        }
+                // Update the LIS array
+                fish[left] = envelope[1];
 
-        public static int getMax(Envelope envelope)
-        {
-            int max = 1;
-            foreach (Envelope fish in envelope.fits)
-            {
-                int result = getMax(fish) + 1;
-                if (result > max) envelope.max = max = result;
+                // Check if a new maximum length is found
+                if (left == max)
+                {
+                    max++;
+                }
             }
             return max;
         }
