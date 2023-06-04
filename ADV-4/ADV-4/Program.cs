@@ -38,7 +38,7 @@ namespace ADV_4
             int max = 0;
             foreach (int[] envelope in envelopes)
             {
-                // Perform binary search to find the insertion point
+                //binary search
                 int left = 0, right = max;
                 while (left < right)
                 {
@@ -53,10 +53,8 @@ namespace ADV_4
                     }
                 }
 
-                // Update the LIS array
                 fish[left] = envelope[1];
 
-                // Check if a new maximum length is found
                 if (left == max)
                 {
                     max++;
