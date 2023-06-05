@@ -7,28 +7,13 @@ namespace ADV_4
     {
         static void Main(string[] args)
         {
-            int[][] envelopes = new int[4][];
-            for (int i = 0; i < envelopes.GetLength(0); i++)
-            {
-                envelopes[i] = new int[2];
-            }
+            int[][] envelopes = { new int[] { 1, 15 }, new int[] { 7, 18 }, new int[] { 7, 6 }, new int[] { 7, 100 }, new int[] { 2, 200 }, new int[] { 17, 30 }, new int[] { 17, 45 }, new int[] { 3, 5 }, new int[] { 7, 8 }, new int[] { 3, 6 }, new int[] { 3, 10 }, new int[] { 7, 20 }, new int[] { 17, 3 }, new int[] { 17, 45 } };
             
-            envelopes[0][0] = 5;
-            envelopes[0][1] = 4;
 
-            envelopes[1][0] = 6;
-            envelopes[1][1] = 4;
-
-            envelopes[2][0] = 6;
-            envelopes[2][1] = 7;
-
-            envelopes[3][0] = 2;
-            envelopes[3][1] = 3;
-
-            Console.WriteLine(doStuff(envelopes));
+            Console.WriteLine(MaxEnvelopes(envelopes));
         }
 
-        public static int doStuff(int[][] envelopes)
+        public static int MaxEnvelopes(int[][] envelopes)
         {
             envelopes = envelopes.OrderBy(y => y[0]).ThenBy(y => y[1]).ToArray();
 
@@ -36,6 +21,7 @@ namespace ADV_4
             Array.Fill(fish, int.MaxValue);
 
             int max = 0;
+            int lastx = 0;
             foreach (int[] envelope in envelopes)
             {
                 //binary search
@@ -53,11 +39,17 @@ namespace ADV_4
                     }
                 }
 
-                fish[left] = envelope[1];
 
-                if (left == max)
+                if (left == max && lastx < envelope[0])
                 {
+                    fish[left] = envelope[1];
                     max++;
+                    lastx = envelope[0];
+                }
+                else if (left < max && lastx < envelope[0] && fish[left] > envelope[1])
+                {
+                    fish[left] = MaxEnvelopes(envelopes.) envelope[1];
+                    lastx = envelope[0];
                 }
             }
             return max;
