@@ -47,24 +47,25 @@ namespace ADV_20
 
             fixed (byte* start = &array[0], copyPointer = &copy[0])
             {
-                long buffer;
+                decimal buffer;
+                int bufferInBytes = 16;
                 byte* current = start;
                 byte* destination = copyPointer;
 
-                long* temp;
+                decimal* temp;
 
-                for (int i = 0; i < N / 8; i++)
+                for (int i = 0; i < N / bufferInBytes; i++)
                 {
-                    buffer = *(long*)current;
+                    buffer = *(decimal*)current;
 
-                    *(long*)destination = buffer;
+                    *(decimal*)destination = buffer;
 
-                    current += 8;
-                    destination += 8;
+                    current += bufferInBytes;
+                    destination += bufferInBytes;
                 }
 
                 byte fish;
-                for (int i = 0; i < N % 8; i++)
+                for (int i = 0; i < N % bufferInBytes; i++)
                 {
                     fish = *current;
                     *destination = fish;
