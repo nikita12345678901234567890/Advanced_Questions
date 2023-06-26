@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ADV_6
 {
-    internal class Node
+    // BST structure
+    public class Node
     {
+        public int Value { get; set; }
+        public Node Left { get; set; }
+        public Node Right { get; set; }
     }
 }
