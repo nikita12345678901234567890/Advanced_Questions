@@ -25,7 +25,7 @@
 
             root.Right = new Node(15);
             root.Right.Left = new Node(11);
-            root.Right.Left.Left = new Node(4);
+            //root.Right.Left.Left = new Node(4);
             root.Right.Left.Right = new Node(14);
             root.Right.Right = new Node(20);
 
