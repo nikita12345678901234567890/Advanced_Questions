@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ADV_200
 {
-    //have a struct consrained to only having IComparables.
+    //have a struct constrained to only having IComparables.
     //On one of these fields only you have [sortBy]
     //have function that orderBys by this field
 
