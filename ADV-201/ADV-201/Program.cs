@@ -1,4 +1,6 @@
-﻿using System.Reflection;
+﻿using Microsoft.VisualBasic;
+
+using System.Reflection;
 
 namespace ADV_201
 {
@@ -6,24 +8,29 @@ namespace ADV_201
     {
         static void Main(string[] args)
         {
-            int yeet = 2;
+            Assembly testAssembly = Assembly.LoadFile(@"\\GMRDC1\Folder Redirection\Nikita.Ulianov\Documents\Github\Advanced_Questions\ADV-201\ADV-201\bin\Debug\net6.0\ADV-201.dll");
 
-            Type type = yeet.GetType();
-            var instance = Activator.CreateInstance(type);
+            Type catType = testAssembly.GetType("ADV_201.Cat");
 
+            object catInstance = Activator.CreateInstance(catType);
 
-            object thing = new Cat();
+            PropertyInfo numberPropertyInfo = catType.GetProperty("age");
 
-            Type type1 = thing.GetType();
+            int age = (int)numberPropertyInfo.GetValue(catInstance, null);
 
-            //type1.
+            catType.GetMethod("Meow").Invoke(catInstance, null);
+            ;
         }
     }
 
     public class Cat
     {
-        int age = 2;
+        public int age { get; set; }
 
+        public Cat()
+        { 
+            age = 3;
+        }
         public Cat(int age = 0)
         {
             this.age = age;
@@ -31,7 +38,7 @@ namespace ADV_201
 
         public void Meow()
         {
-            Console.WriteLine(Meow);
+            Console.WriteLine("Meow");
         }
     }
 }
