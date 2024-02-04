@@ -2,12 +2,16 @@
 #include <iostream>
 int main()
 {
-	std::string buzzez[] = { "FizzBuzz", "1", "2", "Fizz", "4", "Buzz", "Fizz", "7", "8", "Fizz", "Buzz", "11", "Fizz", "13", "14" };
+	std::string buzzez[] = { "", "Fizz", "Buzz", "FizzBuzz" };
 	int i = 0;
 	int n = 30;
+	std::string output = "";
 
 Loop:
-	std::cout << buzzez[((i - ((i / 15) * 15)) % 15)] << std::endl;
+	
+	int three = i % 3;
+
+
 	i++;
 	if (i < n) goto Loop;
 
