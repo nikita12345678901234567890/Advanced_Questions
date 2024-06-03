@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDP_Test", "UDP_Test\UDP_Test.csproj", "{DF1D274B-39F2-45A6-8250-88C75B72895C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reciever", "Reciever\Reciever.csproj", "{DBEF7A41-09D5-489F-8B5C-C7EBB44ABEF5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF1D274B-39F2-45A6-8250-88C75B72895C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF1D274B-39F2-45A6-8250-88C75B72895C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF1D274B-39F2-45A6-8250-88C75B72895C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF1D274B-39F2-45A6-8250-88C75B72895C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBEF7A41-09D5-489F-8B5C-C7EBB44ABEF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBEF7A41-09D5-489F-8B5C-C7EBB44ABEF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBEF7A41-09D5-489F-8B5C-C7EBB44ABEF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBEF7A41-09D5-489F-8B5C-C7EBB44ABEF5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C12C95F9-ACC8-4BA8-9EBE-D44CA10A439B}
+	EndGlobalSection
+EndGlobal
